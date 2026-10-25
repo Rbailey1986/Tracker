@@ -101,7 +101,16 @@ public actor TrackerAPI {
 
     public func testConnection() async throws -> (success: Bool, latencyMs: Double) {
         let start = Date()
-        let _: [String: String] = try await request(path: "/api/overview")
+        guard let url = URL(string: "\(getBaseURL())/api/today") else {
+            throw APIError.invalidURL
+        }
+        var req = URLRequest(url: url)
+        req.httpMethod = "GET"
+        let (_, response) = try await session.data(for: req)
+        guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
+            let code = (response as? HTTPURLResponse)?.statusCode ?? 500
+            throw APIError.serverError(statusCode: code, message: "Connection returned status \(code)")
+        }
         let elapsed = Date().timeIntervalSince(start) * 1000.0
         return (true, elapsed)
     }

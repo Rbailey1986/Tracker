@@ -3,13 +3,8 @@ name: Build iOS App
 on:
   push:
     branches: [ main, master ]
-    paths:
-      - 'ios/**'
-      - '.github/workflows/ios.yml'
   pull_request:
     branches: [ main, master ]
-    paths:
-      - 'ios/**'
   workflow_dispatch:
 
 jobs:
@@ -21,13 +16,12 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Select Xcode
-        run: sudo xcode-select -switch /Applications/Xcode_15.4.app || sudo xcode-select -switch /Applications/Xcode.app
+      - name: Show Build Environment
+        run: |
+          xcodebuild -version
+          xcrun --show-sdk-version --sdk iphonesimulator
 
-      - name: Show Xcode Version
-        run: xcodebuild -version
-
-      - name: Build iOS App (Simulator / Device generic)
+      - name: Build iOS App
         run: |
           xcodebuild \
             -project ios/Tracker.xcodeproj \
@@ -36,12 +30,21 @@ jobs:
             -destination 'generic/platform=iOS Simulator' \
             -derivedDataPath build \
             CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            CODE_SIGN_IDENTITY="" \
             build
 
       - name: Package App Bundle
         run: |
           mkdir -p output
-          cp -R build/Build/Products/Release-iphonesimulator/Tracker.app output/
+          APP_PATH=$(find build/Build/Products -name "Tracker.app" -type d | head -n 1)
+          if [ -z "$APP_PATH" ]; then
+            echo "Error: Tracker.app not found in build products"
+            find build -maxdepth 5
+            exit 1
+          fi
+          echo "Found app at: $APP_PATH"
+          cp -R "$APP_PATH" output/
           cd output && zip -r Tracker-iOS.zip Tracker.app
 
       - name: Upload Build Artifact
