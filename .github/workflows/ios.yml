@@ -43,6 +43,16 @@ jobs:
               exit 1
             }
 
+      - name: Report Build Failure Summary
+        if: failure()
+        run: |
+          if [ -f xcodebuild.log ]; then
+            echo "### Xcodebuild Error Summary" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            tail -n 60 xcodebuild.log >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          fi
+
       - name: Package App Bundle
         run: |
           mkdir -p output

@@ -2,7 +2,6 @@ import Foundation
 import SwiftUI
 import Combine
 
-@MainActor
 public class AppState: ObservableObject {
     public static let shared = AppState()
 
@@ -17,6 +16,7 @@ public class AppState: ObservableObject {
 
     private init() {}
 
+    @MainActor
     public func showToast(_ message: String) {
         withAnimation {
             self.toastMessage = message
@@ -30,6 +30,7 @@ public class AppState: ObservableObject {
         }
     }
 
+    @MainActor
     public func refreshToday() async {
         do {
             self.todayData = try await TrackerAPI.shared.fetchToday()
@@ -39,6 +40,7 @@ public class AppState: ObservableObject {
         }
     }
 
+    @MainActor
     public func refreshProjects() async {
         do {
             self.projects = try await TrackerAPI.shared.fetchProjects()
@@ -48,6 +50,7 @@ public class AppState: ObservableObject {
         }
     }
 
+    @MainActor
     public func refreshWeekly() async {
         do {
             self.weeklyData = try await TrackerAPI.shared.fetchWeekly()
@@ -57,6 +60,7 @@ public class AppState: ObservableObject {
         }
     }
 
+    @MainActor
     public func refreshAll() async {
         self.isRefreshing = true
         async let t: () = refreshToday()
@@ -66,6 +70,7 @@ public class AppState: ObservableObject {
         self.isRefreshing = false
     }
 
+    @MainActor
     public func toggleTaskCompletion(_ task: TaskItem) async {
         let generator = UIImpactFeedbackGenerator(style: .medium)
         generator.impactOccurred()
