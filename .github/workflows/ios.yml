@@ -32,7 +32,15 @@ jobs:
             CODE_SIGNING_ALLOWED=NO \
             CODE_SIGNING_REQUIRED=NO \
             CODE_SIGN_IDENTITY="" \
+            COMPILER_INDEX_STORE_ENABLE=NO \
             build
+
+      - name: Print detailed errors on failure
+        if: failure()
+        run: |
+          echo "=== BUILD LOG SUMMARY ==="
+          grep -rn "error:" build/Logs || true
+          find build -name "*.log" -exec cat {} + 2>/dev/null || true
 
       - name: Package App Bundle
         run: |

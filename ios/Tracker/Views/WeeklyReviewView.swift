@@ -141,7 +141,7 @@ public struct WeeklyReviewView: View {
                                         .fontWeight(.semibold)
                                 }
                                 Spacer()
-                                Text(q.created_at.prefix(10))
+                                Text(String(q.created_at.prefix(10)))
                                     .font(.caption2)
                                     .foregroundColor(.secondary)
                             }

@@ -95,6 +95,16 @@ public struct TodayView: View {
 
     // MARK: - Header & Stats Ring
 
+    private func todayProgress(for data: TodayResponse) -> Double {
+        let doneCount = data.done_today.count
+        let totalToday = doneCount + data.due_today.count
+        return totalToday > 0 ? Double(doneCount) / Double(totalToday) : 1.0
+    }
+
+    private func focusTasks(for data: TodayResponse) -> [TaskItem] {
+        return data.overdue + data.due_today
+    }
+
     @ViewBuilder
     private func headerCard(_ data: TodayResponse) -> some View {
         CardContainer {
@@ -123,19 +133,15 @@ public struct TodayView: View {
                 Spacer()
 
                 // Small progress circle for today
-                let doneCount = data.done_today.count
-                let totalToday = doneCount + data.due_today.count
-                let progress = totalToday > 0 ? Double(doneCount) / Double(totalToday) : 1.0
-
                 ZStack {
                     Circle()
                         .stroke(Color(.tertiarySystemFill), lineWidth: 6)
                     Circle()
-                        .trim(from: 0, to: CGFloat(progress))
+                        .trim(from: 0, to: CGFloat(todayProgress(for: data)))
                         .stroke(Color.green, style: StrokeStyle(lineWidth: 6, lineCap: .round))
                         .rotationEffect(.degrees(-90))
                     VStack(spacing: 0) {
-                        Text("\(doneCount)")
+                        Text("\(data.done_today.count)")
                             .font(.title3)
                             .fontWeight(.bold)
                         Text("done")
@@ -162,8 +168,7 @@ public struct TodayView: View {
                     .foregroundColor(.secondary)
             }
 
-            let focusTasks = (data.overdue + data.due_today)
-            if focusTasks.isEmpty {
+            if focusTasks(for: data).isEmpty {
                 CardContainer {
                     HStack {
                         Image(systemName: "checkmark.seal.fill")
@@ -182,7 +187,7 @@ public struct TodayView: View {
                 }
             } else {
                 VStack(spacing: 8) {
-                    ForEach(focusTasks) { task in
+                    ForEach(focusTasks(for: data)) { task in
                         taskRow(task)
                     }
                 }

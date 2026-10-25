@@ -98,7 +98,7 @@ public struct SettingsView: View {
             .task {
                 serverURL = await TrackerAPI.shared.getBaseURL()
             }
-            .onChange(of: serverURL) { newValue in
+            .onChange(of: serverURL) { _, newValue in
                 Task {
                     await TrackerAPI.shared.setBaseURL(newValue)
                 }
