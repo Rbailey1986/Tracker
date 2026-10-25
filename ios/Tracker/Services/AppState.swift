@@ -16,15 +16,16 @@ public class AppState: ObservableObject {
 
     private init() {}
 
-    @MainActor
     public func showToast(_ message: String) {
-        withAnimation {
-            self.toastMessage = message
-        }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+        DispatchQueue.main.async {
             withAnimation {
-                if self.toastMessage == message {
-                    self.toastMessage = nil
+                self.toastMessage = message
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
+                withAnimation {
+                    if self.toastMessage == message {
+                        self.toastMessage = nil
+                    }
                 }
             }
         }
