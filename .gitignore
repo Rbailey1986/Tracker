@@ -1,0 +1,37 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+web/dist/
+dist/
+dist-installer/
+desktop/app/bin/
+desktop/app/obj/
+desktop/app/publish/
+ios/build/
+*.app/
+*.ipa/
+*.zip
+
+# Tests & temporary files
+.tmp/
+playwright-report/
+test-results/
+
+# Database & local data
+*.db
+*.db-wal
+*.db-shm
+*.log
+
+# Environment & credentials
+.env
+.env.*
+*.local
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+.vscode/

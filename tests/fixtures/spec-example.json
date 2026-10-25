@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "file_id": "2026-10-21-bbfm-ep04",
+  "created_at": "2026-10-21T15:42:00Z",
+  "agent": "Claude",
+  "summary": "Plan episode 5 research and close the episode 4 scripts task",
+  "changes": [
+    { "change_id": "c1f0a9e2-5b1d-4c1e-9a51-0b6d2f0e0a01", "op": "create", "entity": "task", "temp_id": "new-1",
+      "fields": { "project_id": "01JB7Q00000000000000000BBF", "title": "Research track list (Ep 5)", "owner": "agent", "due_date": "2026-10-30" } },
+    { "change_id": "5d1b77c0-8f0a-4a35-b0f4-6a8f0c1e0a02", "op": "create", "entity": "subtask",
+      "fields": { "task_id": "$new-1", "text": "Shortlist for review" } },
+    { "change_id": "8a2e4d10-3c6b-4f7e-8d2a-9e1f0b2c0a03", "op": "update", "entity": "task", "id": "01JB8B0000000000000000E4SC", "base_version": 1,
+      "fields": { "status": "done" } }
+  ],
+  "questions": [
+    { "key": "guest-ep4", "task_id": "01JB8C0000000000000000E4NR", "text": "Episode 4 has no guest confirmed. Push the recording date?" }
+  ]
+}

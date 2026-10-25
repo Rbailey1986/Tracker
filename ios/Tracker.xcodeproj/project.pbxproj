@@ -1,0 +1,347 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		200000010000000000000001 /* TrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000010000000000000001 /* TrackerApp.swift */; };
+		200000020000000000000002 /* TrackerModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000020000000000000002 /* TrackerModels.swift */; };
+		200000030000000000000003 /* TrackerAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000030000000000000003 /* TrackerAPI.swift */; };
+		200000040000000000000004 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000040000000000000004 /* AppState.swift */; };
+		200000050000000000000005 /* CommonComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000050000000000000005 /* CommonComponents.swift */; };
+		200000060000000000000006 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000060000000000000006 /* TodayView.swift */; };
+		200000070000000000000007 /* ProjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000070000000000000007 /* ProjectsView.swift */; };
+		200000080000000000000008 /* ProjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000080000000000000008 /* ProjectDetailView.swift */; };
+		200000090000000000000009 /* TaskDetailSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000090000000000000009 /* TaskDetailSheet.swift */; };
+		200000100000000000000010 /* WeeklyReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000100000000000000010 /* WeeklyReviewView.swift */; };
+		200000110000000000000011 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 100000110000000000000011 /* SettingsView.swift */; };
+		200000120000000000000012 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 100000120000000000000012 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		100000010000000000000001 /* TrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerApp.swift; sourceTree = "<group>"; };
+		100000020000000000000002 /* TrackerModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerModels.swift; sourceTree = "<group>"; };
+		100000030000000000000003 /* TrackerAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerAPI.swift; sourceTree = "<group>"; };
+		100000040000000000000004 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		100000050000000000000005 /* CommonComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonComponents.swift; sourceTree = "<group>"; };
+		100000060000000000000006 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
+		100000070000000000000007 /* ProjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsView.swift; sourceTree = "<group>"; };
+		100000080000000000000008 /* ProjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectDetailView.swift; sourceTree = "<group>"; };
+		100000090000000000000009 /* TaskDetailSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailSheet.swift; sourceTree = "<group>"; };
+		100000100000000000000010 /* WeeklyReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeeklyReviewView.swift; sourceTree = "<group>"; };
+		100000110000000000000011 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		100000120000000000000012 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		100000130000000000000013 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		400000010000000000000002 /* Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		600000010000000000000001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		300000010000000000000001 = {
+			isa = PBXGroup;
+			children = (
+				300000020000000000000002 /* Tracker */,
+				300000060000000000000006 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		300000020000000000000002 /* Tracker */ = {
+			isa = PBXGroup;
+			children = (
+				100000010000000000000001 /* TrackerApp.swift */,
+				300000030000000000000003 /* Models */,
+				300000040000000000000004 /* Services */,
+				300000050000000000000005 /* Views */,
+				100000120000000000000012 /* Assets.xcassets */,
+				100000130000000000000013 /* Info.plist */,
+			);
+			path = Tracker;
+			sourceTree = "<group>";
+		};
+		300000030000000000000003 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				100000020000000000000002 /* TrackerModels.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		300000040000000000000004 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				100000030000000000000003 /* TrackerAPI.swift */,
+				100000040000000000000004 /* AppState.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		300000050000000000000005 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				300000070000000000000007 /* Components */,
+				100000060000000000000006 /* TodayView.swift */,
+				100000070000000000000007 /* ProjectsView.swift */,
+				100000080000000000000008 /* ProjectDetailView.swift */,
+				100000090000000000000009 /* TaskDetailSheet.swift */,
+				100000100000000000000010 /* WeeklyReviewView.swift */,
+				100000110000000000000011 /* SettingsView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		300000070000000000000007 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				100000050000000000000005 /* CommonComponents.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		300000060000000000000006 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				400000010000000000000002 /* Tracker.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		400000010000000000000001 /* Tracker */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 700000010000000000000001 /* Build configuration list for PBXNativeTarget "Tracker" */;
+			buildPhases = (
+				600000020000000000000002 /* Sources */,
+				600000010000000000000001 /* Frameworks */,
+				600000030000000000000003 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Tracker;
+			productName = Tracker;
+			productReference = 400000010000000000000002 /* Tracker.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		500000010000000000000001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					400000010000000000000001 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = 700000020000000000000002 /* Build configuration list for PBXProject "Tracker" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 300000010000000000000001;
+			productRefGroup = 300000060000000000000006 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				400000010000000000000001 /* Tracker */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		600000030000000000000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				200000120000000000000012 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		600000020000000000000002 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				200000010000000000000001 /* TrackerApp.swift in Sources */,
+				200000020000000000000002 /* TrackerModels.swift in Sources */,
+				200000030000000000000003 /* TrackerAPI.swift in Sources */,
+				200000040000000000000004 /* AppState.swift in Sources */,
+				200000050000000000000005 /* CommonComponents.swift in Sources */,
+				200000060000000000000006 /* TodayView.swift in Sources */,
+				200000070000000000000007 /* ProjectsView.swift in Sources */,
+				200000080000000000000008 /* ProjectDetailView.swift in Sources */,
+				200000090000000000000009 /* TaskDetailSheet.swift in Sources */,
+				200000100000000000000010 /* WeeklyReviewView.swift in Sources */,
+				200000110000000000000011 /* SettingsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		700000030000000000000003 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		700000030000000000000004 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		700000040000000000000005 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Tracker/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.robertbuilt.tracker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		700000040000000000000006 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Tracker/Info.plist;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 0.1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.robertbuilt.tracker;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		700000010000000000000001 /* Build configuration list for PBXNativeTarget "Tracker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				700000040000000000000005 /* Debug */,
+				700000040000000000000006 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		700000020000000000000002 /* Build configuration list for PBXProject "Tracker" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				700000030000000000000003 /* Debug */,
+				700000030000000000000004 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = 500000010000000000000001 /* Project object */;
+}

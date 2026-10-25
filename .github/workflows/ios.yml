@@ -1,0 +1,52 @@
+name: Build iOS App
+
+on:
+  push:
+    branches: [ main, master ]
+    paths:
+      - 'ios/**'
+      - '.github/workflows/ios.yml'
+  pull_request:
+    branches: [ main, master ]
+    paths:
+      - 'ios/**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build Native iOS App
+    runs-on: macos-14
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -switch /Applications/Xcode_15.4.app || sudo xcode-select -switch /Applications/Xcode.app
+
+      - name: Show Xcode Version
+        run: xcodebuild -version
+
+      - name: Build iOS App (Simulator / Device generic)
+        run: |
+          xcodebuild \
+            -project ios/Tracker.xcodeproj \
+            -scheme Tracker \
+            -configuration Release \
+            -destination 'generic/platform=iOS Simulator' \
+            -derivedDataPath build \
+            CODE_SIGNING_ALLOWED=NO \
+            build
+
+      - name: Package App Bundle
+        run: |
+          mkdir -p output
+          cp -R build/Build/Products/Release-iphonesimulator/Tracker.app output/
+          cd output && zip -r Tracker-iOS.zip Tracker.app
+
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Tracker-iOS-App
+          path: output/Tracker-iOS.zip
+          retention-days: 14

@@ -1,0 +1,58 @@
+{
+  "name": "tracker",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Personal project tracker with an agent folder (Phase 1)",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node scripts/start.mjs",
+    "dev:server": "tsx watch server/main.ts --no-open",
+    "dev:web": "vite",
+    "build": "vite build",
+    "build:installer": "node scripts/build-installer.mjs",
+    "seed": "tsx scripts/seed.ts",
+    "schemas": "tsx scripts/print-schemas.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "desktop:install": "node scripts/desktop.mjs install",
+    "desktop:remove": "node scripts/desktop.mjs remove",
+    "setup": "node scripts/setup.mjs",
+    "uninstall": "node scripts/uninstall.mjs",
+    "claude:install": "node scripts/claude-setup.mjs install",
+    "claude:remove": "node scripts/claude-setup.mjs remove",
+    "antigravity:install": "node scripts/antigravity-setup.mjs install",
+    "antigravity:remove": "node scripts/antigravity-setup.mjs remove"
+  },
+  "dependencies": {
+    "@fastify/static": "^7.0.4",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@fontsource/ibm-plex-sans": "^5.3.0",
+    "@modelcontextprotocol/sdk": "^1.32.1",
+    "@tanstack/react-query": "^5.104.5",
+    "@vitejs/plugin-react": "^4.7.0",
+    "better-sqlite3": "^13.0.3",
+    "chokidar": "^3.6.0",
+    "fastify": "^4.29.1",
+    "marked": "^18.1.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "ulid": "^3.0.2",
+    "vite": "^5.4.21",
+    "zod": "^3.25.76",
+    "zod-to-json-schema": "^3.25.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.64.1",
+    "@types/better-sqlite3": "^9.6.0",
+    "@types/node": "^26.6.5",
+    "@types/react": "^18.3.31",
+    "@types/react-dom": "^18.3.7",
+    "vitest": "^2.1.9"
+  }
+}

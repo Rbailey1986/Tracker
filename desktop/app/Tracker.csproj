@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!-- Tracker.exe: the tracker in its own window (WebView2), so it can be pinned to the taskbar. Built by npm run desktop:install. -->
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationIcon>tracker.ico</ApplicationIcon>
+    <AssemblyName>Tracker</AssemblyName>
+    <Product>Tracker</Product>
+    <AssemblyTitle>Tracker</AssemblyTitle>
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="tracker.ico" LogicalName="tracker.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Web.WebView2" Version="1.0.4258.31" />
+  </ItemGroup>
+</Project>
