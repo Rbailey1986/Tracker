@@ -3,7 +3,7 @@ import { z } from 'zod';
 // ---------- Enums ----------
 
 export const ProjectStatus = z.enum(['active', 'paused', 'archived']);
-export const TaskStatus = z.enum(['not_started', 'in_progress', 'blocked', 'done']);
+export const TaskStatus = z.enum(['not_started', 'in_progress', 'blocked', 'done', 'on_hold']);
 export const Owner = z.enum(['you', 'agent']);
 export const Priority = z.enum(['low', 'medium', 'high']);
 export const CreatedFrom = z.enum(['manual', 'template', 'agent_file']);

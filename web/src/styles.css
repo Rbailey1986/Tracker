@@ -17,6 +17,7 @@
   --pill-bl-bg: #fdecea; --pill-bl-fg: #a32117;
   --pill-dn-bg: #e7f5ec; --pill-dn-fg: #1e6b33;
   --pill-od-bg: #fff1e3; --pill-od-fg: #9a4508;
+  --pill-oh-bg: #f4effa; --pill-oh-fg: #6941c6;
   --chip-you-bg: #eef0f3; --chip-you-fg: #3d434f;
   --chip-agent-bg: #f1edfc; --chip-agent-fg: #5b34a8;
   --chip-import-bg: #e6f4f6; --chip-import-fg: #0b6b78;
@@ -123,6 +124,7 @@ button.area-link:hover, button.area-link.active { color: var(--text); background
 .pill.in_progress { background: var(--pill-ip-bg); color: var(--pill-ip-fg); }
 .pill.blocked { background: var(--pill-bl-bg); color: var(--pill-bl-fg); }
 .pill.done { background: var(--pill-dn-bg); color: var(--pill-dn-fg); }
+.pill.on_hold { background: var(--pill-oh-bg); color: var(--pill-oh-fg); }
 .pill.overdue { background: var(--pill-od-bg); color: var(--pill-od-fg); }
 .pill.ok { background: var(--pill-dn-bg); color: var(--pill-dn-fg); }
 .chip { display: inline-flex; align-items: center; border-radius: 4px; padding: 0 6px; font-size: 11.5px; font-weight: 500; white-space: nowrap; }

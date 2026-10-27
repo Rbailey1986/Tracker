@@ -34,7 +34,7 @@ export const api = {
 
 // ---------- types returned by the server ----------
 
-export type TaskStatus = 'not_started' | 'in_progress' | 'blocked' | 'done';
+export type TaskStatus = 'not_started' | 'in_progress' | 'blocked' | 'done' | 'on_hold';
 export type Owner = 'you' | 'agent';
 
 export interface ProjectSession {

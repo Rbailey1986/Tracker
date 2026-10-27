@@ -95,7 +95,7 @@ export function weeklyReview(db: DB, now = new Date()): WeeklyReviewData {
   // Slipped tasks: open tasks due on or before today
   const byDue = (a: TaskView, b: TaskView) => (a.due_date < b.due_date ? -1 : a.due_date > b.due_date ? 1 : 0);
   const slipped = allTasks
-    .filter((t) => t.status !== 'done' && t.due_date && t.due_date <= date)
+    .filter((t) => t.status !== 'done' && t.status !== 'on_hold' && t.due_date && t.due_date <= date)
     .sort(byDue)
     .map((t): WeeklySlippedTask => ({
       id: t.id,
@@ -117,7 +117,7 @@ export function weeklyReview(db: DB, now = new Date()): WeeklyReviewData {
     .filter((p) => p.quiet)
     .map((p) => {
       const pTasks = allTasks.filter((t) => t.project_id === p.id);
-      const next = pickNextStep(pTasks) ?? pTasks.find((t) => t.status !== 'done' && !t.blocked) ?? null;
+      const next = pickNextStep(pTasks) ?? pTasks.find((t) => t.status !== 'done' && t.status !== 'on_hold' && !t.blocked) ?? null;
       return {
         id: p.id,
         name: p.name,
@@ -125,7 +125,7 @@ export function weeklyReview(db: DB, now = new Date()): WeeklyReviewData {
         area: p.area,
         last_worked_on: p.last_worked_on ?? null,
         days_ago: p.days_ago ?? null,
-        open_tasks_count: pTasks.filter((t) => t.status !== 'done').length,
+        open_tasks_count: pTasks.filter((t) => t.status !== 'done' && t.status !== 'on_hold').length,
         next_step: next ? { id: next.id, title: next.title } : null,
       };
     })

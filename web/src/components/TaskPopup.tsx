@@ -263,6 +263,25 @@ export function TaskPopup({ taskId, onClose }: { taskId: string; onClose: () => 
           >
             Delete
           </button>
+          {task.status !== 'done' && (
+            task.status === 'on_hold' ? (
+              <button
+                className="btn"
+                data-testid="resume-on-hold-btn"
+                onClick={() => save({ status: 'not_started' })}
+              >
+                Resume task
+              </button>
+            ) : (
+              <button
+                className="btn"
+                data-testid="put-on-hold-btn"
+                onClick={() => save({ status: 'on_hold' })}
+              >
+                Put on hold
+              </button>
+            )
+          )}
           <span className="grow" />
           {task.status === 'done' ? (
             <button className="btn" onClick={() => mutate(() => api.post(`/api/tasks/${task.id}/reopen`, { version: task.version }))}>

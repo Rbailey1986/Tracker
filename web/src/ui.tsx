@@ -51,6 +51,7 @@ export const STATUS_LABEL: Record<TaskStatus, string> = {
   in_progress: 'In progress',
   blocked: 'Blocked',
   done: 'Done',
+  on_hold: 'On hold',
 };
 
 export function fmtDate(d: string | null | undefined): string {

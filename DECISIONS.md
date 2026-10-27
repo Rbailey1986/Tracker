@@ -136,3 +136,7 @@ Where the spec left something open, the simplest option was chosen and noted her
   "Back up now" button (`POST /api/settings/backup`) is available on Settings. Decided 2026-10-25.
 - **Milestones kind filtering (Release history):** The Milestones tab includes quick filters (`All`, `Releases`,
   `Features`, `Changes`), letting users switch to a dedicated "Release history" view for the project. Decided 2026-10-25.
+- **On hold task status and dedicated On hold tab:** `TaskStatus` now includes `on_hold` (migration 007). Tasks placed on hold
+  are excluded from active Focus/Today and the primary project List tab, and displayed in a dedicated "On hold" project tab with
+  a task count badge and one-click "Resume" action. TaskPopup features direct "Put on hold" and "Resume task" buttons alongside the
+  status dropdown. Decided 2026-10-27.

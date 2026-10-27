@@ -38,13 +38,13 @@ export function decorateTasks(db: DB, rawTasks: any[], today = todayLocal()): Ta
       depends_on: myDeps.map((d) => d.id),
       depends_on_tasks: myDeps,
       blocked: t.status === 'blocked' || myDeps.some((d) => d.status !== 'done'),
-      overdue: !!t.due_date && t.due_date < today && t.status !== 'done',
+      overdue: !!t.due_date && t.due_date < today && t.status !== 'done' && t.status !== 'on_hold',
       subtasks: subs.filter((s) => s.task_id === t.id),
     } as TaskView;
   });
 }
 
-export function listTasks(db: DB, filter: { projectId?: string; owner?: string; status?: string } = {}): TaskView[] {
+export function listTasks(db: DB, filter: { projectId?: string; owner?: string; status?: string } = {}, today = todayLocal()): TaskView[] {
   const where = ['t.deleted_at IS NULL', 'p.deleted_at IS NULL'];
   const args: unknown[] = [];
   if (filter.projectId) (where.push('t.project_id = ?'), args.push(filter.projectId));
@@ -56,12 +56,16 @@ export function listTasks(db: DB, filter: { projectId?: string; owner?: string; 
        WHERE ${where.join(' AND ')} ORDER BY t.sort_order, t.due_date IS NULL, t.due_date, t.created_at`,
     )
     .all(...args);
-  return decorateTasks(db, rows);
+  return decorateTasks(db, rows, today);
 }
 
-/** A project's one next step: the task in progress, else the open high-priority task that isn't blocked. */
+/** A project's one next step: the task in progress, else the open high-priority task that isn't blocked or on hold. */
 export function pickNextStep(tasks: TaskView[]): TaskView | null {
-  return tasks.find((t) => t.status === 'in_progress') ?? tasks.find((t) => t.status !== 'done' && t.priority === 'high' && !t.blocked) ?? null;
+  return (
+    tasks.find((t) => t.status === 'in_progress') ??
+    tasks.find((t) => t.status !== 'done' && t.status !== 'on_hold' && t.priority === 'high' && !t.blocked) ??
+    null
+  );
 }
 
 export function getTaskView(db: DB, id: string): TaskView | undefined {
@@ -81,7 +85,7 @@ export function dueTasks(db: DB, days: number): TaskView[] {
     .prepare(
       `SELECT t.*, p.name AS project_name, p.color AS project_color FROM tasks t JOIN projects p ON p.id = t.project_id
        WHERE t.deleted_at IS NULL AND p.deleted_at IS NULL AND p.status <> 'archived'
-         AND t.status <> 'done' AND t.due_date IS NOT NULL AND t.due_date <= ?
+         AND t.status <> 'done' AND t.status <> 'on_hold' AND t.due_date IS NOT NULL AND t.due_date <= ?
        ORDER BY t.due_date, t.title`,
     )
     .all(until);

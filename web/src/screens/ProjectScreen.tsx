@@ -203,7 +203,7 @@ export function ProjectScreen({ id, taskId }: { id: string; taskId?: string }) {
   const [owner, setOwner] = useState<'' | 'you' | 'agent'>('');
   const [sort, setSortKey] = useTaskSort();
   const [adding, setAdding] = useState(false);
-  const [view, setView] = useState<'list' | 'board' | 'timeline' | 'ideas' | 'milestones' | 'activity'>('list');
+  const [view, setView] = useState<'list' | 'on_hold' | 'board' | 'timeline' | 'ideas' | 'milestones' | 'activity'>('list');
   const { data: p, error } = useQuery({ queryKey: ['project', id], queryFn: () => api.get<Project>(`/api/projects/${id}`) });
   const { data: ideas } = useQuery({ queryKey: ['ideas', 'project', id], queryFn: () => api.get<Idea[]>(`/api/ideas?project=${id}`) });
   const openIdeas = (ideas ?? []).filter((i) => i.status === 'new').length;
@@ -217,10 +217,12 @@ export function ProjectScreen({ id, taskId }: { id: string; taskId?: string }) {
     queryKey: ['tasks', id, owner],
     queryFn: () => api.get<Task[]>(`/api/projects/${id}/tasks${owner ? `?owner=${owner}` : ''}`),
   });
+  const onHoldTasks = (tasks ?? []).filter((t) => t.status === 'on_hold');
 
   if (error) return <div className="page">This project doesn't exist any more. <a href="#/projects">Back to all projects</a></div>;
   if (!p) return <div className="page muted">Loading…</div>;
   const save = (fields: Partial<Project>, version = p.version) => mutate(() => api.patch(`/api/projects/${p.id}`, { version, ...fields }));
+  const saveTask = (t: Task, fields: Partial<Task>) => mutate(() => api.patch(`/api/tasks/${t.id}`, { version: t.version, ...fields }));
 
   return (
     <div className="page">
@@ -325,6 +327,9 @@ export function ProjectScreen({ id, taskId }: { id: string; taskId?: string }) {
             <button className={view === 'list' ? 'on' : ''} onClick={() => setView('list')}>
               List
             </button>
+            <button className={view === 'on_hold' ? 'on' : ''} onClick={() => setView('on_hold')}>
+              On hold{onHoldTasks.length > 0 && <span className="muted"> {onHoldTasks.length}</span>}
+            </button>
             <button className={view === 'ideas' ? 'on' : ''} onClick={() => setView('ideas')}>
               Ideas{openIdeas > 0 && <span className="muted"> {openIdeas}</span>}
             </button>
@@ -341,7 +346,7 @@ export function ProjectScreen({ id, taskId }: { id: string; taskId?: string }) {
               Activity
             </button>
             <span className="grow" />
-            {(view === 'list' || view === 'board' || view === 'timeline') && (
+            {(view === 'list' || view === 'on_hold' || view === 'board' || view === 'timeline') && (
               <div className="seg" style={{ margin: '5px 0' }}>
                 {(['', 'you', 'agent'] as const).map((o) => (
                   <button key={o} className={owner === o ? 'on' : ''} onClick={() => setOwner(o)}>
@@ -359,6 +364,65 @@ export function ProjectScreen({ id, taskId }: { id: string; taskId?: string }) {
             <div className="card-pad">
               <Feed project={p.id} limit={50} />
             </div>
+          )}
+          {view === 'on_hold' && (
+            <table className="table" data-testid="on-hold-table">
+              <thead>
+                <tr>
+                  <th style={{ width: '52%' }}>Task</th>
+                  <th>Owner</th>
+                  <SortHeader label="Due" k="due" sort={sort} onSort={setSortKey} />
+                  <SortHeader label="Priority" k="priority" sort={sort} onSort={setSortKey} />
+                  <th style={{ textAlign: 'right' }}>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                {sortTasks(onHoldTasks, sort).map((t) => (
+                  <tr key={t.id} className="clickable" data-testid="on-hold-task-row" onClick={() => go({ name: 'project', id: p.id, taskId: t.id })}>
+                    <td>
+                      <div className="row">
+                        <span>{t.title}</span>
+                        {t.estimate_minutes ? (
+                          <span className="muted small" title={`Estimate: ${formatMinutes(t.estimate_minutes)}`}>
+                            ~{formatMinutes(t.estimate_minutes)}
+                          </span>
+                        ) : null}
+                        {t.subtasks.length > 0 && (
+                          <span className="muted small">
+                            {t.subtasks.filter((s) => s.done).length}/{t.subtasks.length}
+                          </span>
+                        )}
+                        <span className="pill on_hold">On hold</span>
+                      </div>
+                    </td>
+                    <td>
+                      <span className={`chip ${t.owner}`}>{t.owner === 'you' ? 'You' : 'Agent'}</span>
+                    </td>
+                    <td>{t.due_date ? fmtDate(t.due_date) : <span className="muted">—</span>}</td>
+                    <td>{t.priority ? <span className={`prio ${t.priority}`}>{t.priority[0].toUpperCase() + t.priority.slice(1)}</span> : <span className="muted">—</span>}</td>
+                    <td style={{ textAlign: 'right' }}>
+                      <button
+                        className="btn small"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          saveTask(t, { status: 'not_started' });
+                        }}
+                        title="Resume task to active list"
+                      >
+                        Resume
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+                {onHoldTasks.length === 0 && (
+                  <tr>
+                    <td colSpan={5} className="muted" style={{ padding: '24px 12px' }}>
+                      No tasks on hold. Open any task and click <strong>Put on hold</strong> to move it here.
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
           )}
           {view === 'list' && adding && <NewTaskRow projectId={p.id} onCreated={() => setAdding(false)} />}
           {view === 'list' && (

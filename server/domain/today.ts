@@ -26,7 +26,7 @@ export function today(db: DB, now = new Date()) {
   const projects = listProjects(db).filter((p) => p.status !== 'archived');
   const live = new Set(projects.map((p) => p.id));
   const tasks = listTasks(db).filter((t) => live.has(t.project_id));
-  const open = tasks.filter((t) => t.status !== 'done');
+  const open = tasks.filter((t) => t.status !== 'done' && t.status !== 'on_hold');
   const byDue = (a: TaskView, b: TaskView) => (a.due_date < b.due_date ? -1 : a.due_date > b.due_date ? 1 : 0);
 
   const nextSteps = projects

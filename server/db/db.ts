@@ -43,10 +43,12 @@ export function migrate(db: DB): void {
     const id = Number.parseInt(f, 10);
     if (done.has(id)) continue;
     const sql = fs.readFileSync(path.join(MIGRATIONS_DIR, f), 'utf8');
+    db.pragma('foreign_keys = OFF');
     db.transaction(() => {
       db.exec(sql);
       db.prepare('INSERT INTO schema_migrations (id, name, applied_at) VALUES (?, ?, ?)').run(id, f, new Date().toISOString());
     })();
+    db.pragma('foreign_keys = ON');
   }
 }
 

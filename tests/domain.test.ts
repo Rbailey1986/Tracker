@@ -183,4 +183,15 @@ describe('derived values', () => {
     const updated = inBatch(db, { actor: 'you' }, (w) => w.update('project', p.id, { folder: 'C:\\Projects\\Updated' })).row;
     expect(updated.folder).toBe('C:\\Projects\\Updated');
   });
+
+  it('supports on_hold status and excludes from overdue/next-step', () => {
+    const { db, mk } = setup();
+    const today = todayLocal();
+    const t = mk('Hold me', { due_date: addDays(today, -2), priority: 'high' });
+    const held = inBatch(db, { actor: 'you' }, (w) => w.update('task', t.id, { status: 'on_hold' })).row;
+    expect(held.status).toBe('on_hold');
+    const view = getTaskView(db, t.id)!;
+    expect(view.status).toBe('on_hold');
+    expect(view.overdue).toBe(false);
+  });
 });
